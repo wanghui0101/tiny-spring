@@ -36,7 +36,7 @@ public abstract class AbstractBeanFactory implements BeanFactory {
 	 */
 	@Override
 	public void registerBeanDefinition(String name, BeanDefinition beanDefinition) throws Exception {
-		Object bean = doCreateBean(beanDefinition);
+		Object bean = doCreateBean(beanDefinition); // 向bean工厂中注册时才会创建bean实例
 		beanDefinition.setBean(bean);
 		this.beanDefinitionMap.put(name, beanDefinition);
 	}

@@ -13,7 +13,7 @@ public class BeanDefinition {
 	private String beanClassName; // 类名(包括包名)
 	private Class<?> beanClass; // 类
 	private Object bean; // 类的实例
-	private PropertyValues propertyValues;
+	private PropertyValues propertyValues = new PropertyValues(); // 所有属性键值对
 	
 	public BeanDefinition() {
 	}

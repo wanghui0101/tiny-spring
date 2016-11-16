@@ -13,6 +13,7 @@ public class BeanDefinition {
 	private String beanClassName; // 类名(包括包名)
 	private Class<?> beanClass; // 类
 	private Object bean; // 类的实例
+	private PropertyValues propertyValues;
 	
 	public BeanDefinition() {
 	}
@@ -44,6 +45,14 @@ public class BeanDefinition {
 
 	public void setBean(Object bean) {
 		this.bean = bean;
+	}
+
+	public PropertyValues getPropertyValues() {
+		return propertyValues;
+	}
+
+	public void setPropertyValues(PropertyValues propertyValues) {
+		this.propertyValues = propertyValues;
 	}
 	
 }

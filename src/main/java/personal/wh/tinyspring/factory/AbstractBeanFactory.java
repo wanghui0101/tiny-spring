@@ -32,9 +32,10 @@ public abstract class AbstractBeanFactory implements BeanFactory {
 	 * 注册bean定义
 	 * @param name
 	 * @param beanDefinition
+	 * @throws Exception 
 	 */
 	@Override
-	public void registerBeanDefinition(String name, BeanDefinition beanDefinition) {
+	public void registerBeanDefinition(String name, BeanDefinition beanDefinition) throws Exception {
 		Object bean = doCreateBean(beanDefinition);
 		beanDefinition.setBean(bean);
 		this.beanDefinitionMap.put(name, beanDefinition);
@@ -45,6 +46,6 @@ public abstract class AbstractBeanFactory implements BeanFactory {
 	 * @param beanDefinition
 	 * @return
 	 */
-	protected abstract Object doCreateBean(BeanDefinition beanDefinition);
+	protected abstract Object doCreateBean(BeanDefinition beanDefinition) throws Exception;
 	
 }

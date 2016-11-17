@@ -1,5 +1,8 @@
 package personal.wh.tinyspring.factory;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -19,13 +22,27 @@ public abstract class AbstractBeanFactory implements BeanFactory {
 	private Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<String, BeanDefinition>();
 	
 	/**
+	 * 所有的beanName
+	 */
+	private final List<String> beanDefinitionNames = new ArrayList<String>();
+	
+	/**
 	 * 通过beanName获取bean定义
 	 * @param name
 	 * @return
+	 * @throws Exception 
 	 */
 	@Override
-	public Object getBean(String name) {
-		return this.beanDefinitionMap.get(name).getBean();
+	public Object getBean(String name) throws Exception {
+		BeanDefinition beanDefinition = this.beanDefinitionMap.get(name);
+		if (beanDefinition == null) {
+			throw new IllegalArgumentException("No bean named " + name + " is defined");
+		}
+		Object bean = beanDefinition.getBean();
+		if (bean == null) {
+			bean = doCreateBean(beanDefinition);
+		}
+		return bean;
 	}
 	
 	/**
@@ -36,9 +53,19 @@ public abstract class AbstractBeanFactory implements BeanFactory {
 	 */
 	@Override
 	public void registerBeanDefinition(String name, BeanDefinition beanDefinition) throws Exception {
-		Object bean = doCreateBean(beanDefinition); // 向bean工厂中注册时才会创建bean实例
-		beanDefinition.setBean(bean);
+		this.beanDefinitionNames.add(name);
 		this.beanDefinitionMap.put(name, beanDefinition);
+	}
+	
+	/**
+	 * 实例化所有bean，并完成依赖bean的组装
+	 * @throws Exception
+	 */
+	public void preInstantiateSingletons() throws Exception {
+		for (Iterator<String> it = this.beanDefinitionNames.iterator(); it.hasNext();) {
+			String beanName = it.next();
+			getBean(beanName);
+		}
 	}
 	
 	/**

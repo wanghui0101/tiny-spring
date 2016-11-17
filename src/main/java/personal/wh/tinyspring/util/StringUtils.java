@@ -12,4 +12,12 @@ public abstract class StringUtils {
 		sb.append(Character.toUpperCase(str.charAt(0))).append(str.substring(1));
 		return sb.toString();
 	}
+	
+	public static boolean isEmpty(String str) {
+		return str == null || str.length() == 0;
+	}
+	
+	public static boolean isNotEmpty(String str) {
+		return str != null && str.length() > 0;
+	}
 }

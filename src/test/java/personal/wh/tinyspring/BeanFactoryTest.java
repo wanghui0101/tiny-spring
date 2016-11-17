@@ -4,8 +4,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import personal.wh.tinyspring.factory.AbstractBeanFactory;
 import personal.wh.tinyspring.factory.AutowireCapableBeanFactory;
-import personal.wh.tinyspring.factory.BeanFactory;
 import personal.wh.tinyspring.io.DefaultResourceLoader;
 import personal.wh.tinyspring.io.ResourceLoader;
 import personal.wh.tinyspring.xml.XmlBeanDefinitionReader;
@@ -21,18 +21,22 @@ public class BeanFactoryTest {
 		beanDefinitionReader.loadBeanDefinitions("tinyioc.xml");
 		
 		// 2. 初始化bean工厂
-		BeanFactory beanFactory = new AutowireCapableBeanFactory();
+		AbstractBeanFactory beanFactory = new AutowireCapableBeanFactory();
 		
-		// 3. 将bean定义读取器读取的bean定义，依次向bean工厂中注册
+		// 3. 将bean定义读取器读取的bean定义，依次向bean工厂中注册(只注册，并不实例化bean)
 		for (Map.Entry<String, BeanDefinition> beanDefinition : beanDefinitionReader.getRegistry().entrySet()) {
 			beanFactory.registerBeanDefinition(beanDefinition.getKey(), beanDefinition.getValue());
 		}
+		
+		// 4. 实例化所有bean，并进行属性注入
+		beanFactory.preInstantiateSingletons();
 
-		// 4. 从bean工厂中获取bean
+		// 5. 从bean工厂中获取bean，并调用方法
 		HelloWorldService helloWorldServiceBean = (HelloWorldService) beanFactory.getBean("helloWorldService");
-
-		// 5. 调用bean中的方法
 		helloWorldServiceBean.helloWorld();
+		
+		OutputService outputService = (OutputService) beanFactory.getBean("outputService");
+		outputService.output();
 	}
 
 }

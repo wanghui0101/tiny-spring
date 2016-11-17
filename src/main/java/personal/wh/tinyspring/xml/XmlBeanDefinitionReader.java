@@ -12,9 +12,12 @@ import org.w3c.dom.NodeList;
 
 import personal.wh.tinyspring.AbstractBeanDefinitionReader;
 import personal.wh.tinyspring.BeanDefinition;
+import personal.wh.tinyspring.BeanReference;
 import personal.wh.tinyspring.PropertyValue;
 import personal.wh.tinyspring.io.Resource;
 import personal.wh.tinyspring.io.ResourceLoader;
+import personal.wh.tinyspring.util.Assert;
+import personal.wh.tinyspring.util.StringUtils;
 
 public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
@@ -55,11 +58,18 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
 	protected void processBeanDefinition(Element beanTagEle) {
 		String id = beanTagEle.getAttribute("id");
+		String name = beanTagEle.getAttribute("name");
 		String beanClassName = beanTagEle.getAttribute("class");
 		BeanDefinition beanDefinition = new BeanDefinition();
 		beanDefinition.setBeanClassName(beanClassName);
 		processProperty(beanTagEle, beanDefinition);
-		getRegistry().put(id, beanDefinition);
+		getRegistry().put(getBeanName(id, name, beanClassName), beanDefinition);
+	}
+	
+	protected String getBeanName(String id, String name, String beanClassName) {
+		String beanName = StringUtils.isNotEmpty(id) ? id : (StringUtils.isNotEmpty(name) ? name : beanClassName);
+		Assert.notEmpty(beanName);
+		return beanName;
 	}
 
 	protected void processProperty(Element beanTagEle, BeanDefinition beanDefinition) {
@@ -70,7 +80,13 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 				Element propertyTagEle = (Element) propertyTag;
 				String name = propertyTagEle.getAttribute("name");
 				String value = propertyTagEle.getAttribute("value");
-				beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
+				String ref = propertyTagEle.getAttribute("ref");
+				if (StringUtils.isNotEmpty(value)) {
+					beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
+				} else if (StringUtils.isNotEmpty(ref)) {
+					BeanReference beanReference = new BeanReference(name);
+					beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanReference));
+				}
 			}
 		}
 	}

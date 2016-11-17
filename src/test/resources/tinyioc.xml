@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
 
-    <bean id="helloWorldService" class="personal.wh.tinyspring.HelloWorldService">
-        <property name="text" value="wh"></property>
-    </bean>
+	<bean id="outputService" class="personal.wh.tinyspring.OutputService">
+		<property name="helloWorldService" ref="helloWorldService" />
+	</bean>
+	
+	<bean id="helloWorldService" class="personal.wh.tinyspring.HelloWorldService">
+		<property name="text" value="wh" />
+		<property name="num" value="3" />
+	</bean>
 
 </beans>

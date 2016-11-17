@@ -1,9 +1,9 @@
-package personal.wh.tinyspring;
+package personal.wh.tinyspring.beans;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import personal.wh.tinyspring.io.ResourceLoader;
+import personal.wh.tinyspring.beans.io.ResourceLoader;
 
 public abstract class AbstractBeanDefinitionReader implements BeanDefinitionReader {
 

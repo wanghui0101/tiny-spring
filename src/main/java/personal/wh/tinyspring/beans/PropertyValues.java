@@ -1,4 +1,4 @@
-package personal.wh.tinyspring;
+package personal.wh.tinyspring.beans;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package personal.wh.tinyspring.factory;
+package personal.wh.tinyspring.beans.factory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import personal.wh.tinyspring.BeanDefinition;
+import personal.wh.tinyspring.beans.BeanDefinition;
 
 /**
  * bean工厂，持有所有bean定义
@@ -51,7 +51,6 @@ public abstract class AbstractBeanFactory implements BeanFactory {
 	 * @param beanDefinition
 	 * @throws Exception 
 	 */
-	@Override
 	public void registerBeanDefinition(String name, BeanDefinition beanDefinition) throws Exception {
 		this.beanDefinitionNames.add(name);
 		this.beanDefinitionMap.put(name, beanDefinition);

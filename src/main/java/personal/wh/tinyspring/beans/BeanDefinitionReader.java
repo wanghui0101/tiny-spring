@@ -1,4 +1,4 @@
-package personal.wh.tinyspring;
+package personal.wh.tinyspring.beans;
 
 /**
  * 从外部读取bean定义

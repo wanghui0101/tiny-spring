@@ -1,4 +1,4 @@
-package personal.wh.tinyspring.xml;
+package personal.wh.tinyspring.beans.xml;
 
 import java.io.InputStream;
 
@@ -10,12 +10,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import personal.wh.tinyspring.AbstractBeanDefinitionReader;
-import personal.wh.tinyspring.BeanDefinition;
-import personal.wh.tinyspring.BeanReference;
-import personal.wh.tinyspring.PropertyValue;
-import personal.wh.tinyspring.io.Resource;
-import personal.wh.tinyspring.io.ResourceLoader;
+import personal.wh.tinyspring.beans.AbstractBeanDefinitionReader;
+import personal.wh.tinyspring.beans.BeanDefinition;
+import personal.wh.tinyspring.beans.BeanReference;
+import personal.wh.tinyspring.beans.PropertyValue;
+import personal.wh.tinyspring.beans.io.Resource;
+import personal.wh.tinyspring.beans.io.ResourceLoader;
 import personal.wh.tinyspring.util.Assert;
 import personal.wh.tinyspring.util.StringUtils;
 

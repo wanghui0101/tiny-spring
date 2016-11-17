@@ -1,10 +1,10 @@
-package personal.wh.tinyspring.factory;
+package personal.wh.tinyspring.beans.factory;
 
 import java.lang.reflect.Method;
 
-import personal.wh.tinyspring.BeanDefinition;
-import personal.wh.tinyspring.BeanReference;
-import personal.wh.tinyspring.PropertyValue;
+import personal.wh.tinyspring.beans.BeanDefinition;
+import personal.wh.tinyspring.beans.BeanReference;
+import personal.wh.tinyspring.beans.PropertyValue;
 import personal.wh.tinyspring.util.StringUtils;
 
 /**

@@ -1,4 +1,4 @@
-package personal.wh.tinyspring;
+package personal.wh.tinyspring.beans;
 
 /**
  * 依赖bean

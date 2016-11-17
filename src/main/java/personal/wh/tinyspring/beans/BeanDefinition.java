@@ -1,4 +1,4 @@
-package personal.wh.tinyspring;
+package personal.wh.tinyspring.beans;
 
 /**
  * bean定义

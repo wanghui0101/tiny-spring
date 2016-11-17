@@ -1,4 +1,4 @@
-package personal.wh.tinyspring.io;
+package personal.wh.tinyspring.beans.io;
 
 import java.net.URL;
 

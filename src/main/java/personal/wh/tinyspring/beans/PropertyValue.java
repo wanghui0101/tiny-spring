@@ -1,4 +1,4 @@
-package personal.wh.tinyspring;
+package personal.wh.tinyspring.beans;
 
 /**
  * 封装bean的一对属性键值

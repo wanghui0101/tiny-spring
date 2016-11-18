@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
 
-	<bean id="outputService" class="personal.wh.tinyspring.OutputService">
+	<bean id="outputService" class="personal.wh.tinyspring.OutputServiceImpl">
 		<property name="helloWorldService" ref="helloWorldService" />
 	</bean>
 	
-	<bean id="helloWorldService" class="personal.wh.tinyspring.HelloWorldService">
+	<bean id="helloWorldService" class="personal.wh.tinyspring.HelloWorldServiceImpl">
 		<property name="text" value="wh" />
 		<property name="num" value="3" />
 	</bean>

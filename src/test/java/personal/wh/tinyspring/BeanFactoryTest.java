@@ -34,7 +34,7 @@ public class BeanFactoryTest {
 		beanFactory.preInstantiateSingletons();
 
 		// 5. 从bean工厂中获取bean，并调用方法
-		HelloWorldService helloWorldServiceBean = (HelloWorldService) beanFactory.getBean("helloWorldService");
+		HelloWorldServiceImpl helloWorldServiceBean = (HelloWorldServiceImpl) beanFactory.getBean("helloWorldService");
 		helloWorldServiceBean.helloWorld();
 		
 		OutputService outputService = (OutputService) beanFactory.getBean("outputService");

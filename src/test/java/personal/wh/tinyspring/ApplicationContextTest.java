@@ -14,7 +14,7 @@ public class ApplicationContextTest {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("tinyioc.xml");
 
 		// 2. 从bean工厂中获取bean，并调用方法
-		HelloWorldService helloWorldServiceBean = (HelloWorldService) applicationContext.getBean("helloWorldService");
+		HelloWorldServiceImpl helloWorldServiceBean = (HelloWorldServiceImpl) applicationContext.getBean("helloWorldService");
 		helloWorldServiceBean.helloWorld();
 
 		OutputService outputService = (OutputService) applicationContext.getBean("outputService");

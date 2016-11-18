@@ -14,18 +14,6 @@ import personal.wh.tinyspring.util.StringUtils;
  */
 public class AutowireCapableBeanFactory extends AbstractBeanFactory {
 
-	@Override
-	protected Object doCreateBean(BeanDefinition beanDefinition) throws Exception {
-		Object bean = createBeanInstance(beanDefinition);
-		beanDefinition.setBean(bean);
-		applyPropertyValues(bean, beanDefinition); // 属性注入
-		return bean;
-	}
-	
-	protected Object createBeanInstance(BeanDefinition beanDefinition) throws Exception {
-		return beanDefinition.getBeanClass().newInstance();
-	}
-	
 	/**
 	 * 通过setter方法注入属性
 	 * @param bean
@@ -41,7 +29,23 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
 			if (value instanceof BeanReference) { // 依赖bean注入
 				BeanReference beanRef = (BeanReference) value;
 				value = getBean(beanRef.getName()); // 获取bean的同时，进行了实例化
-				setterMethod = bean.getClass().getDeclaredMethod(setter, value.getClass());
+				
+				try {
+					setterMethod = bean.getClass().getDeclaredMethod(setter, value.getClass());
+				} catch (NoSuchMethodException e) {
+					Method[] methods = bean.getClass().getDeclaredMethods();
+					for (Method targetSetter : methods) {
+						if (targetSetter.getName().equals(setter)) {
+							Class<?>[] parameterTypes = targetSetter.getParameterTypes();
+							if (parameterTypes != null && parameterTypes.length == 1) { // 只有1个参数
+								Class<?> parameterType = parameterTypes[0]; // setter方法参数类型
+								if (parameterType.isAssignableFrom(value.getClass())) {
+									setterMethod = targetSetter;
+								}
+							}
+						}
+					}
+				}
 			} else { // 基本类型参数注入
 				
 				// 因注入的值都是以字符串表示的，但注入的字段不一定是字符串类型，所以还需要类型转换

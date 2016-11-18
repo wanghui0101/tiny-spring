@@ -2,9 +2,9 @@ package personal.wh.tinyspring;
 
 public class OutputServiceImpl implements OutputService {
 
-	private HelloWorldServiceImpl helloWorldService;
+	private HelloWorldService helloWorldService;
 
-	public void setHelloWorldService(HelloWorldServiceImpl helloWorldService) {
+	public void setHelloWorldService(HelloWorldService helloWorldService) {
 		this.helloWorldService = helloWorldService;
 	}
 

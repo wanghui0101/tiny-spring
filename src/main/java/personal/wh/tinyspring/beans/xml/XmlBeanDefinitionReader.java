@@ -84,7 +84,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 				if (StringUtils.isNotEmpty(value)) {
 					beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
 				} else if (StringUtils.isNotEmpty(ref)) {
-					BeanReference beanReference = new BeanReference(name);
+					BeanReference beanReference = new BeanReference(ref);
 					beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanReference));
 				}
 			}

@@ -23,9 +23,8 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
 		this.configLocation = configLocation;
 		refresh();
 	}
-
-	@Override
-	public void refresh() throws Exception {
+	
+	protected void loadBeanDefinitions(AbstractBeanFactory beanFactory) throws Exception {
 		// 1. 使用bean定义读取器从xml文件中加载bean定义
 		ResourceLoader resourceLoader = new DefaultResourceLoader();
 		AbstractBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(resourceLoader);
@@ -35,12 +34,6 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
 		for (Map.Entry<String, BeanDefinition> beanDefinition : beanDefinitionReader.getRegistry().entrySet()) {
 			beanFactory.registerBeanDefinition(beanDefinition.getKey(), beanDefinition.getValue());
 		}
-
-		if (!lazyInit) {
-			// 3. 实例化所有bean，并进行属性注入
-			beanFactory.preInstantiateSingletons();
-		}
-		
 	}
 
 }

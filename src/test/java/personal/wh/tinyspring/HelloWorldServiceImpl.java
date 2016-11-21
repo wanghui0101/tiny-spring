@@ -1,11 +1,12 @@
 package personal.wh.tinyspring;
 
 import personal.wh.tinyspring.beans.factory.BeanNameAware;
+import personal.wh.tinyspring.beans.factory.InitializingBean;
 import personal.wh.tinyspring.context.ApplicationContext;
 import personal.wh.tinyspring.context.ApplicationContextAware;
 
 public class HelloWorldServiceImpl implements HelloWorldService, 
-	BeanNameAware, ApplicationContextAware {
+	BeanNameAware, ApplicationContextAware, InitializingBean {
 	
 	private String text;
 	private int num;
@@ -34,8 +35,12 @@ public class HelloWorldServiceImpl implements HelloWorldService,
 	@Override
 	public void helloWorld() {
 		System.out.println("applicationContext: " + applicationContext);
-		System.out.println("beanName: " + beanName);
 		System.out.println("hello " + text + num + "!");
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("beanName: " + beanName + " initialized.");
 	}
 	
 }

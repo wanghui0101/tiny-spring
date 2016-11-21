@@ -4,19 +4,24 @@
 	<bean id="outputService" class="personal.wh.tinyspring.OutputServiceImpl">
 		<property name="helloWorldService" ref="helloWorldService" />
 	</bean>
-	
+
 	<bean id="helloWorldService" class="personal.wh.tinyspring.HelloWorldServiceImpl">
 		<property name="text" value="wh" />
 		<property name="num" value="3" />
 	</bean>
-	
+
 	<bean id="timeInterceptor" class="personal.wh.tinyspring.TimerInterceptor"></bean>
+	
+	<bean id="autoProxyCreator" class="personal.wh.tinyspring.aop.AspectJAwareAdvisorAutoProxyCreator">
+		<!-- 强制开启cglib代理 -->
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+	
+	<bean id="aspectjAspect" class="personal.wh.tinyspring.aop.AspectJExpressionPointcutAdvisor">
+		<property name="advice" ref="timeInterceptor" />
+		<property name="expression" value="execution(* personal.wh.tinyspring.*.*(..))" />
+	</bean>
 
-    <bean id="autoProxyCreator" class="personal.wh.tinyspring.aop.AspectJAwareAdvisorAutoProxyCreator"></bean>
-
-    <bean id="aspectjAspect" class="personal.wh.tinyspring.aop.AspectJExpressionPointcutAdvisor">
-        <property name="advice" ref="timeInterceptor" />
-        <property name="expression" value="execution(* personal.wh.tinyspring.*.*(..))" />
-    </bean>
+	<bean id="sampleService" class="personal.wh.tinyspring.SampleService" />
 
 </beans>

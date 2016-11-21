@@ -53,7 +53,8 @@ public abstract class AbstractBeanFactory implements BeanFactory {
 	public <T> T getBean(Class<T> beanClass) throws Exception {
 		List<T> beans = getBeansForType(beanClass);
 		if (beans == null || beans.size() != 1) {
-			throw new RuntimeException();
+			throw new IllegalArgumentException("No unique bean typed of " + beanClass + "is defined. "
+					+ "You can try getBeansForType() method.");
 		}
 		return beans.get(0);
 	}

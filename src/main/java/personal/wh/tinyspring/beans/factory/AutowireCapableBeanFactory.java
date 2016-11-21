@@ -78,6 +78,9 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
 		if (parameterType.equals(long.class) || parameterType.equals(Long.class)) {
 			return Long.valueOf(parameter);
 		}
+		if (parameterType.equals(boolean.class) || parameterType.equals(Boolean.class)) {
+			return Boolean.valueOf(parameter);
+		}
 		// TODO：其它类型转换
 		return parameter;
 	}

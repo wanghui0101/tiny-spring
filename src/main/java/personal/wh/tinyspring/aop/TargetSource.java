@@ -7,21 +7,26 @@ package personal.wh.tinyspring.aop;
  */
 public class TargetSource {
 
-	private Class<?>[] targetClass; // 被增强的类(若使用jdk代理则必须为这个类的接口类)
-	
 	private Object target; // 被增强的类实例
+	private Class<?> targetClass; // 被增强的类
+	private Class<?>[] interfaces; // 被增强的类接口
 
-	public TargetSource(Class<?>[] targetClass, Object target) {
-		this.targetClass = targetClass;
+	public TargetSource(Object target, Class<?> targetClass, Class<?>... interfaces) {
 		this.target = target;
-	}
-
-	public Class<?>[] getTargetClass() {
-		return targetClass;
+		this.targetClass = targetClass;
+		this.interfaces = interfaces;
 	}
 
 	public Object getTarget() {
 		return target;
+	}
+
+	public Class<?> getTargetClass() {
+		return targetClass;
+	}
+	
+	public Class<?>[] getInterfaces() {
+		return interfaces;
 	}
 	
 }

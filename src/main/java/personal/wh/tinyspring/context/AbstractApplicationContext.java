@@ -4,6 +4,7 @@ import java.util.List;
 
 import personal.wh.tinyspring.beans.factory.AbstractBeanFactory;
 import personal.wh.tinyspring.beans.factory.BeanPostProcessor;
+import personal.wh.tinyspring.core.OrderComparator;
 
 /**
  * 在BeanFactory的基础上扩展

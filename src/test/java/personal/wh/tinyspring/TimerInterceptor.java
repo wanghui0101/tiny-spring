@@ -13,10 +13,10 @@ public class TimerInterceptor implements MethodInterceptor {
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 		long start = System.nanoTime();
-		System.out.println("Invocation of Method " + invocation.getMethod().getName() + " start!");
+		System.out.println("Invocation of Method " + invocation.getMethod().getName() + " start1!");
 		Object result = invocation.proceed();
 		long end = System.nanoTime();
-		System.out.println("Invocation of Method " + invocation.getMethod().getName() + " end! takes " + (end - start)
+		System.out.println("Invocation of Method " + invocation.getMethod().getName() + " end1! takes " + (end - start)
 				+ " nanoseconds.");
 		return result;
 	}

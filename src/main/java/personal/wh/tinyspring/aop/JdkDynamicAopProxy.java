@@ -11,19 +11,17 @@ import org.aopalliance.intercept.MethodInterceptor;
  * 
  * @author wh
  */
-public class JdkDynamicAopProxy implements AopProxy, InvocationHandler {
+public class JdkDynamicAopProxy extends AbstractAopProxy implements InvocationHandler {
 
-	private AdvisedSupport advisedSupport;
-	
 	public JdkDynamicAopProxy(AdvisedSupport advisedSupport) {
-		this.advisedSupport = advisedSupport;
+		super(advisedSupport);
 	}
-	
+
 	@Override
 	public Object getProxy() {
 		// JDK动态代理的标准写法
 		return Proxy.newProxyInstance(getClass().getClassLoader(), 
-				advisedSupport.getTargetSource().getTargetClass(), this);
+				advisedSupport.getTargetSource().getInterfaces(), this);
 	}
 
 	@Override
